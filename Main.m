@@ -255,7 +255,7 @@ legend('0.6 duty-cycle','Reference 100pts per chip');
 % Can it be seen as the orthogonal projection of s(t) on the unit vector cos(nwt)?
 % (In a certain vectorial space?, which one?)
 % Are cos(wt) and cos(2wt) orthogonal?
-% That would mean there an infinite number of dimension, as many as
+% That would mean there is an infinite number of dimension, as many as
 % harmonics
 
 

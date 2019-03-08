@@ -1,7 +1,7 @@
 
 
 
-function [signal,fs,number_period,npt] = SignalGenerator(signal_type, frequency, amplitude, offset, initial_phase, npp, duration )
+function [signal,fs,number_period,npt] = SignalGenerator(signal_type, frequency, amplitude, amp_offset, phase_offset, npp, duration )
 
     % Signal Generator function
     %   Generate any periodic signal you want
@@ -9,8 +9,8 @@ function [signal,fs,number_period,npt] = SignalGenerator(signal_type, frequency,
     % -signal_type: 'sinus','cosinus','rectangular','triangular' [char]
     % -frequency: [Hz]
     % -amplitude
-    % -offset
-    % -initial_phase: in degree
+    % -amp_offset
+    % -phase_offset: in degree
     % -npp: number of point per period
     % -duration: [second]
     %   Output:
@@ -20,14 +20,14 @@ function [signal,fs,number_period,npt] = SignalGenerator(signal_type, frequency,
     % -npt: total number of point
 
     % Phase Radian conversion
-    initial_phase = (initial_phase*pi)/180;                 
+    phase_offset = (phase_offset*pi)/180;                 
 
     %%%%%%%%%%%%%%%%%%%%%%
     % Connexe parameters %
     %%%%%%%%%%%%%%%%%%%%%%
     fs = frequency*npp;                             % "sample frequency" equivalent
     number_period = duration * frequency;           % number of period
-    npt = npp * duration * frequency + 1;           % total number of point
+    npt = npp * number_period + 1;                  % total number of point
 
     %%%%%%%%%%%%%%%%%
     % Abscisse Axes %
@@ -43,11 +43,11 @@ function [signal,fs,number_period,npt] = SignalGenerator(signal_type, frequency,
 
     if strcmp(signal_type,'sinus')
         for t = 1:npt
-            signal(t) = offset + amplitude*sin(2*pi*frequency*x(t) - initial_phase);
+            signal(t) = amp_offset + amplitude*sin(2*pi*frequency*x(t) - phase_offset);
         end
     elseif strcmp(signal_type,'cosinus')
         for t = 1:npt
-            signal(t) = offset + amplitude*cos(2*pi*frequency*x(t) - initial_phase);
+            signal(t) = amp_offset + amplitude*cos(2*pi*frequency*x(t) - phase_offset);
         end
     elseif strcmp(signal_type,'rectangular')
 % use square function
